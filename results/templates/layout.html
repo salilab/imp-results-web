@@ -1,0 +1,96 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+     "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+<script type="text/javaScript"
+        src="{{ url_for("static", filename="testfunc.js") }}"></script>
+<script type="text/javaScript"
+        src="{{ url_for("static", filename="sorttable.js") }}"></script>
+
+<link href="{{ url_for("static", filename="tests.css") }}" rel="stylesheet" type="text/css">
+
+<script type="text/javascript"><!--
+window.onload = linkEmail;
+-->
+</script>
+<script type='text/javascript'>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-44570008-3', 'salilab.org');
+  ga('send', 'pageview');
+</script>
+
+<title>{% block pagetitle %}{% endblock %}</title>
+</head>
+
+<body>
+<div id="header">
+<div id="impnav">
+   <table class="imptnav">
+      <tr>
+         <td><a href="//integrativemodeling.org/">
+             <img src="//integrativemodeling.org/images/the_imp.png"
+              height="60" alt="IMP logo"></a></td>
+         <td>
+            <div class="implinks">
+             <ul>
+               <li><a href="//integrativemodeling.org/">home</a></li>
+               <li><a href="//integrativemodeling.org/about.html">about</a></li>
+               <li><a href="//integrativemodeling.org/news.html">news</a></li>
+               <li><a href="//integrativemodeling.org/download.html">download</a></li>
+               <li><a href="//integrativemodeling.org/doc.html"
+                    title="Manual, tutorials, and reference guide">doc</a></li>
+               <li><a href="https://github.com/salilab/imp" title="Source code, maintained at GitHub">source</a></li>
+               <li><a href="//integrativemodeling.org/systems/" title="Applications of IMP to real biological systems">systems</a></li>
+               <li><a href="//integrativemodeling.org/nightly/results/" title="Results of IMP's internal test suite">tests</a></li>
+               <li><a href="https://github.com/salilab/imp/issues" title="Report a bug in IMP">bugs</a></li>
+               <li><a href="//integrativemodeling.org/contact.html" title="Mailing lists and email">contact</a></li>
+           </ul>
+            </div>
+         </td>
+      </tr>
+   </table>
+</div>
+
+<div id="impheaderline">
+</div>
+
+<div class="implinks">
+<a class="labonly" title="Also include results from building extra IMP components that are developed within the Sali lab, and not yet part of the public release. Requires authentication with a Sali lab username and password." href="https://salilab.org/internal/imp/nightly/results/?p=build">Lab-only (auth required)</a>
+  <ul>
+    <li class="thispage"><a href="?p=build">Build summary</a></li>
+    <li><a href="?p=new">New test failures</a></li>
+    <li><a href="?p=all">All test failures</a></li>
+    <li><a href="?p=long">Long-running tests</a></li>
+    <li><a href="?p=bench">Benchmarks</a></li>
+  </ul>
+</div>
+<div class="linkspacer"></div>
+<div class="implinks">
+<script type="text/javascript">
+function change_branch()
+{
+var sel=document.getElementById("branchlist");
+var branches=['?p=build', '?p=build&amp;branch=master', '?p=build&amp;branch=release/2.0.1'];
+window.location.assign(branches[sel.selectedIndex]);
+}
+</script>
+<div class="branchlink">
+<select id="branchlist" onchange="change_branch()">
+<option selected="selected">Branch: develop</option>
+<option>Branch: master</option>
+<option>Branch: release/2.0.1</option>
+</select></div>
+<ul>
+<li><a href="?p=build&amp;date=20191113">2019-11-13</a></li> 
+<li class="thispage"><a href="?p=build">last build</a></li> 
+</ul>
+</div></div>
+<div class="linkspacer"></div>
+
+
+</body></html>

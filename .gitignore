@@ -1,0 +1,5 @@
+Makefile.include
+.cache
+.coverage
+*.pyc
+__pycache__
