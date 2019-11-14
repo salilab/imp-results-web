@@ -1,5 +1,5 @@
-[![Build Status](https://travis-ci.org/salilab/systems-web.svg?branch=master)](https://travis-ci.org/salilab/systems-web)
-[![codecov](https://codecov.io/gh/salilab/systems-web/branch/master/graph/badge.svg)](https://codecov.io/gh/salilab/systems-web)
+[![Build Status](https://travis-ci.org/salilab/imp-results-web.svg?branch=master)](https://travis-ci.org/salilab/imp-results-web)
+[![codecov](https://codecov.io/gh/salilab/imp-results-web/branch/master/graph/badge.svg)](https://codecov.io/gh/salilab/imp-results-web)
 
 This is a simple [Flask](https://palletsprojects.com/p/flask/) application
 to show the [IMP](https://integrativemodeling.org/) nightly build results

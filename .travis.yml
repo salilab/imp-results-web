@@ -1,0 +1,12 @@
+language: python
+dist: xenial
+python:
+  - 2.7
+cache:
+  pip: true
+install:
+  - pip install flask pytest-cov pytest-pep8
+script:
+  - py.test --cov=results --cov-branch --pep8
+after_success:
+  - bash <(curl -s https://codecov.io/bash)
