@@ -5,7 +5,7 @@ This is a simple [Flask](https://palletsprojects.com/p/flask/) application
 to show the [IMP](https://integrativemodeling.org/) nightly build results
 page at https://integrativemodeling.org/nightly/results/.
 
-== Configuration ==
+## Configuration
 
 1. Create a file `Makefile.include` in the same directory as `Makefile` that
    sets the `WEBTOP` variable to a directory readable by Apache.
@@ -19,7 +19,7 @@ page at https://integrativemodeling.org/nightly/results/.
      send emails when the application encounters an error, and a Python
      list of users to notify.
 
-== Apache setup ==
+## Apache setup
 
 1. Install `mod_wsgi`.
 2. Add `Alias` rule to the Apache configuration to point
@@ -27,7 +27,7 @@ page at https://integrativemodeling.org/nightly/results/.
 3. Add a suitable `WSGIScriptAlias` rule to the Apache configuration pointing
    `/nightly/results/` to `<WEBTOP>/results.wsgi`.
 
-== Deployment ==
+## Deployment
 
 Use `make test` to test changes to the application, and `make install` to
 deploy it (this will install the files to the `WEBTOP` directory).
