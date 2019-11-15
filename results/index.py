@@ -16,6 +16,7 @@ imp_github = 'https://github.com/salilab/imp'
 rmf_github = 'https://github.com/salilab/rmf'
 pmi_github = 'https://github.com/salilab/pmi'
 
+
 def get_cache_headers():
     """Cache results for 1 hour"""
     def get_time(t):
@@ -26,6 +27,7 @@ def get_cache_headers():
 Last-Modified: %s
 Expires: %s""" % (get_time(t), get_time(t + 3600))
 
+
 def get_platform_td(platform, fmt="%s"):
     val = platforms_dict.get(platform, None)
     if val:
@@ -33,11 +35,13 @@ def get_platform_td(platform, fmt="%s"):
     else:
         return "<td>" + (fmt % platform) + "</td>"
 
+
 def handle_plural(num, text):
     if num == 1:
         return num, text
     else:
         return num, text + "s"
+
 
 def get_state_td(state):
     if state in OK_STATES:
@@ -45,6 +49,7 @@ def get_state_td(state):
     else:
         cls = "testfail"
     return "<td class=\"%s\">%s</td>" % (cls, state)
+
 
 def get_delta_td(delta):
     if delta is None:
@@ -56,6 +61,7 @@ def get_delta_td(delta):
             cls = "testfail"
         return "<td class=\"%s\">%s</td>" % (cls, delta)
 
+
 def html_escape(text):
     from xml.sax.saxutils import escape
     if text is None:
@@ -63,11 +69,14 @@ def html_escape(text):
     else:
         return escape(text, {'"': "&quot;"})
 
+
 def get_date_link(date):
     return date.strftime('%Y%m%d')
 
+
 def print_footer():
     print "</body></html>"
+
 
 def get_coverage_link(date, covtyp, component, pct, lab_only, branch,
                       nightly_url):
@@ -86,6 +95,7 @@ def get_coverage_link(date, covtyp, component, pct, lab_only, branch,
         branch = branch + '/'
     return '<a class="%s" href="%s/logs/%s%s/coverage/%s/%s/">%s%%</a>' \
            % (cls, prefix, branch, get_date_link(date), covtyp, component, pct)
+
 
 class TestPage(object):
     all_branches = ['develop', 'master', 'release/2.0.1', 'release/2.1',
@@ -433,7 +443,7 @@ window.onload = linkEmail;
         c.execute('SELECT imp_benchmark_files.name AS file_name, '
                   'imp_test_units.name AS unit_name '
                   'FROM imp_benchmark_files,imp_test_units WHERE '
-                  'imp_benchmark_files.unit=imp_test_units.id ' \
+                  'imp_benchmark_files.unit=imp_test_units.id '
                   'AND imp_benchmark_files.id=%s '
                   + self.get_sql_lab_only(), (self.bench,))
         fc_r = c.fetchone()
@@ -810,9 +820,9 @@ window.onload = linkEmail;
                                   build_type='build', data=s)
         elif s['state'] == 'CMAKE_BENCH':
             return make_cmake_loglink(cls='modulebench',
-                                  title="%d component %s failed" \
+                                  title="%d component %s failed"
                                         % handle_plural(s['numfails'],
-                                                        "benchmark") \
+                                                        "benchmark")
                                         + print_newfail(s),
                                   build_type='benchmark', data=s,
                                   numfails=s['numfails'],
@@ -924,9 +934,9 @@ window.onload = linkEmail;
               "return false;\" href=\"#\">%s</a>" % caption
         else:
             return "<a title=\"Show all components and platforms\" " \
-              "onclick=\"toggle_visibility('fullmap', 'failmap', " \
-              "'fulllink', 'faillink'); return false;\" href=\"#\">%s</a>" \
-              % caption
+                "onclick=\"toggle_visibility('fullmap', 'failmap', " \
+                "'fulllink', 'faillink'); return false;\" href=\"#\">%s</a>" \
+                % caption
 
     def display_build_summary(self):
         db = BuildDatabase(self.db, self.config, self.date, self.lab_only,
@@ -999,27 +1009,18 @@ window.onload = linkEmail;
                 print '<p>Lab-only components can be obtained by git ' \
                       'or SVN from the following locations:</p>'
                 print '<ul>'
-                for comp, url in \
-                  [('multifit2',
-                    'https://svn.salilab.org/multifit/multifit2/'),
-                   ('isd2',
-                    'https://github.com/salilab/isd2'),
-                   ('isd_emxl',
-                    'https://github.com/salilab/isd_emxl'),
-                   ('hdx',
-                    'https://github.com/salilab/hdx'),
-                   ('shg',
-                    'https://github.com/salilab/shg'),
-                   ('hmc',
-                    'https://github.com/salilab/hmc'),
-                   ('bayesem2d',
-                    'https://github.com/salilab/bayesem2d'),
-                   ('autodiff',
-                    'https://github.com/salilab/autodiff'),
-                   ('liegroup',
-                    'https://github.com/salilab/liegroup'),
-                   ('domino3',
-                    'https://github.com/salilab/domino3')]:
+                for comp, url in [
+                    ('multifit2',
+                     'https://svn.salilab.org/multifit/multifit2/'),
+                    ('isd2', 'https://github.com/salilab/isd2'),
+                    ('isd_emxl', 'https://github.com/salilab/isd_emxl'),
+                    ('hdx', 'https://github.com/salilab/hdx'),
+                    ('shg', 'https://github.com/salilab/shg'),
+                    ('hmc', 'https://github.com/salilab/hmc'),
+                    ('bayesem2d', 'https://github.com/salilab/bayesem2d'),
+                    ('autodiff', 'https://github.com/salilab/autodiff'),
+                    ('liegroup', 'https://github.com/salilab/liegroup'),
+                    ('domino3', 'https://github.com/salilab/domino3')]:
                     rev = revs.get(comp, "")
                     if rev:
                         if 'github' in url:
@@ -1061,14 +1062,14 @@ window.onload = linkEmail;
                     title = title[:100] + '...'
                 # Link to RMF or PMI commits
                 title = re.sub("salilab/rmf@([a-z0-f]{7})([a-z0-f]+)",
-                               r'<a href="' + rmf_github + \
+                               r'<a href="' + rmf_github +
                                r'/commit/\1\2">salilab/rmf@\1</a>', title)
                 title = re.sub("salilab/pmi@([a-z0-f]{7})([a-z0-f]+)",
-                               r'<a href="' + pmi_github + \
+                               r'<a href="' + pmi_github +
                                r'/commit/\1\2">salilab/pmi@\1</a>', title)
                 # Link to issues
                 title = re.sub(" #(\d+)",
-                               r' <a href="' + imp_github + \
+                               r' <a href="' + imp_github +
                                r'/issues/\1">#\1</a>', title)
                 print '<tr><td><a href="%s/commit/%s">%s</a></td> ' \
                       '<td>%s</td> <td>%s</td></tr>' \
@@ -1127,8 +1128,8 @@ window.onload = linkEmail;
         elif err['type'] == 'misslog':
             txt = 'Expected log file not generated: ' + err['log']
         else:
-            txt = self.get_raw_log_link(err['log'], lab_only, err['type']) \
-                  + ': ' + err['text']
+            txt = (self.get_raw_log_link(err['log'], lab_only, err['type'])
+                   + ': ' + err['text'])
         print '<li>%s</li>' % txt
 
     def print_summary_table(self, summary, build_info, caption, show_failures):
@@ -1142,10 +1143,10 @@ window.onload = linkEmail;
                        % self.get_component_link(row, summary.unit_ids[row])
         print "<table class=\"modules\">"
         print('<caption>%s; '
-              'mouseover or click for more details. %s</caption>' \
-              % (caption,
-                 self.toggle_failmap(show_failures,
-                    "[show only failures]" if show_failures else "[show all]")))
+              'mouseover or click for more details. %s</caption>'
+              % (caption, self.toggle_failmap(
+                  show_failures,
+                  "[show only failures]" if show_failures else "[show all]")))
         print "<thead><tr><th></th>"
         for x in summary.all_archs:
             p = platforms_dict[x]
@@ -1232,7 +1233,15 @@ window.onload = linkEmail;
                   "available.</b></p>"
             return
         table = self.get_branch_table('imp_test_unit_result')
-        query = 'SELECT imp_test_units.name as unit_name, imp_test_units.lab_only, imp_test_unit_result.state, imp_test_unit_result.logline from imp_test_units, ' + table + ' imp_test_unit_result where imp_test_units.id=imp_test_unit_result.unit and date=%s and imp_test_unit_result.arch=%s and imp_test_unit_result.logline is not null ' + self.get_sql_lab_only() + ' order by imp_test_unit_result.logline'
+        query = ('SELECT imp_test_units.name as unit_name, '
+                 'imp_test_units.lab_only, imp_test_unit_result.state, '
+                 'imp_test_unit_result.logline from imp_test_units, '
+                 + table + ' imp_test_unit_result where '
+                 'imp_test_units.id=imp_test_unit_result.unit and date=%s '
+                 'and imp_test_unit_result.arch=%s and '
+                 'imp_test_unit_result.logline is not null '
+                 + self.get_sql_lab_only()
+                 + ' order by imp_test_unit_result.logline')
         print '<div class="loglinks">'
         print '<p>The build on %s gave the following errors on %s:</p>' \
               % (self.date, platforms_dict[arch_name].long)
@@ -1252,15 +1261,15 @@ window.onload = linkEmail;
         print '</ul>'
         print "<p>%s</p>" % self.get_raw_log_link(logfile, False,
                                                   "Download log file")
-        print "<p>%s</p>" % self.get_raw_build_files_link(arch_name, False,
-                                                  "View other build files")
+        print "<p>%s</p>" % self.get_raw_build_files_link(
+            arch_name, False, "View other build files")
 
         if self.lab_only and lab_only_logfile:
             print "<p>%s</p>" \
                   % self.get_raw_log_link(logfile, True,
                                           "Download log file (lab-only)")
-            print "<p>%s</p>" % self.get_raw_build_files_link(arch_name, True,
-                                         "View other build files (lab-only)")
+            print "<p>%s</p>" % self.get_raw_build_files_link(
+                arch_name, True, "View other build files (lab-only)")
         print '</div>'
 
         print '<div class="log">'
@@ -1309,7 +1318,8 @@ window.onload = linkEmail;
               % (prefix, sql['logline'], sql['unit_name'],
                  state_msg[sql['state']])
 
-    def display_tests(self, cur, include_component=True, include_platform=True):
+    def display_tests(self, cur, include_component=True,
+                      include_platform=True):
         yield "<table class=\"sortable\">\n<thead>"
         yield "<tr>"
         if include_component:
@@ -1427,7 +1437,8 @@ window.onload = linkEmail;
         if component.startswith('IMP ') or component == 'IMP':
             component = ('IMP.kernel ' + component[4:]).rstrip()
         return '<a href="%s">%s</a>' \
-               % (self.get_link(page='comp', component=component_id), component)
+               % (self.get_link(page='comp', component=component_id),
+                  component)
 
     def get_arch_id_map(self, c):
         map = {}
@@ -1441,8 +1452,8 @@ window.onload = linkEmail;
         table = self.get_branch_table('imp_test')
         query = "SELECT imp_test_names.name AS test_name, imp_test.name, " \
                 "imp_test_names.unit, imp_test_units.name AS unit_name " \
-                "FROM " + table + " imp_test, imp_test_names, imp_test_units " \
-                "WHERE imp_test.date=%s AND imp_test.name=%s AND " \
+                "FROM " + table + " imp_test, imp_test_names, imp_test_units" \
+                " WHERE imp_test.date=%s AND imp_test.name=%s AND " \
                 "imp_test.name=imp_test_names.id AND " \
                 "imp_test_names.unit=imp_test_units.id" \
                 + self.get_sql_lab_only()
@@ -1465,7 +1476,8 @@ window.onload = linkEmail;
         print "<p>Note that test runtimes are <b>not</b> reliable " \
               "measurements of " \
               "IMP's performance. For that, please see the " \
-              "<a href=\"%s\">benchmarks</a>.</p>" % self.get_link(page='bench')
+              "<a href=\"%s\">benchmarks</a>.</p>" \
+              % self.get_link(page='bench')
         print '<div id="runtime" class="benchmark"></div>'
 
         arch_id_map = self.get_arch_id_map(c)
@@ -1522,7 +1534,7 @@ $(document).ready(function() {
        showTooltip:true
     }
   });
-});""" % ",\n".join("      {label: '%s'}" % arch_id_map[x].short \
+});""" % ",\n".join("      {label: '%s'}" % arch_id_map[x].short
                     for x in arch_ids)
 
         print '</script>'
@@ -1530,7 +1542,16 @@ $(document).ready(function() {
     def display_test(self):
         print "<h1>Test results, %s</h1>" % self.get_build_id()
         table = self.get_branch_table('imp_test')
-        query = "SELECT imp_test_names.name as test_name, imp_test.name, imp_test_names.unit, imp_test.arch, imp_test_units.name as unit_name, imp_test_archs.name as arch_name, imp_test.runtime, imp_test.date, imp_test.state, imp_test.detail from " + table + " imp_test, imp_test_names, imp_test_units, imp_test_archs where imp_test.date=%s and imp_test.name=%s and imp_test.arch=%s and imp_test.name=imp_test_names.id and imp_test_names.unit=imp_test_units.id and imp_test.arch=imp_test_archs.id" + self.get_sql_lab_only()
+        query = ("SELECT imp_test_names.name as test_name, imp_test.name, "
+                 "imp_test_names.unit, imp_test.arch, imp_test_units.name "
+                 "as unit_name, imp_test_archs.name as arch_name, "
+                 "imp_test.runtime, imp_test.date, imp_test.state, "
+                 "imp_test.detail from " + table
+                 + " imp_test, imp_test_names, imp_test_units, "
+                 "imp_test_archs where imp_test.date=%s and imp_test.name=%s "
+                 "and imp_test.arch=%s and imp_test.name=imp_test_names.id "
+                 "and imp_test_names.unit=imp_test_units.id and "
+                 "imp_test.arch=imp_test_archs.id" + self.get_sql_lab_only())
         c = MySQLdb.cursors.DictCursor(self.db)
         c.execute(query, (self.date, self.test, self.platform))
         row = c.fetchone()
@@ -1540,10 +1561,12 @@ $(document).ready(function() {
         print '<table class="testres"><tbody>'
         print "<tr><td>Name</td> <td>%s</td></tr>" % row['test_name']
         print "<tr><td>State</td> %s</tr>" % get_state_td(row['state'])
-        print "<tr><td>Detail</td> <td><pre>%s</pre></td></tr>" % html_escape(row['detail'])
+        print "<tr><td>Detail</td> <td><pre>%s</pre></td></tr>" \
+              % html_escape(row['detail'])
         print "<tr><td>Component</td> <td>%s</td></tr>" \
               % self.get_component_link(row['unit_name'], row['unit'])
-        print "<tr><td>Platform</td> %s</tr>" % get_platform_td(row['arch_name'])
+        print "<tr><td>Platform</td> %s</tr>" \
+              % get_platform_td(row['arch_name'])
         print "<tr><td>Runtime (s)</td> <td>%.2f (<a title=\"Show a plot of " \
               "runtimes for this test for every platform against date\" " \
               "href=\"%s\">plot</a>)</td></tr>" \
@@ -1564,7 +1587,13 @@ $(document).ready(function() {
     def display_test_other_platforms(self, conn, test, arch):
         print "<h2>Summary of results on all platforms</h2>"
         table = self.get_branch_table('imp_test')
-        query = "SELECT imp_test_archs.name as arch_name, imp_test.arch, imp_test.runtime, imp_test.state from " + table + " imp_test, imp_test_names, imp_test_units, imp_test_archs where imp_test.date=%s and imp_test.name=%s and imp_test.name=imp_test_names.id and imp_test_names.unit=imp_test_units.id and imp_test.arch=imp_test_archs.id" + self.get_sql_lab_only()
+        query = ("SELECT imp_test_archs.name as arch_name, imp_test.arch, "
+                 "imp_test.runtime, imp_test.state from " + table
+                 + " imp_test, imp_test_names, imp_test_units, imp_test_archs "
+                 "where imp_test.date=%s and imp_test.name=%s and "
+                 "imp_test.name=imp_test_names.id and "
+                 "imp_test_names.unit=imp_test_units.id and "
+                 "imp_test.arch=imp_test_archs.id" + self.get_sql_lab_only())
         c = MySQLdb.cursors.DictCursor(conn)
         c.execute(query, (self.date, test))
         print "<table class=\"sortable\"><thead><tr><th>Platform</th>"
@@ -1573,7 +1602,7 @@ $(document).ready(function() {
             link = self.get_link(page='results', test=test,
                                  platform=row['arch'])
             print "<tr>%s" % get_platform_td(row['arch_name'],
-                                        fmt="<a href=\"" + link + "\">%s</a>")
+                  fmt="<a href=\"" + link + "\">%s</a>")
             print "%s <td>%.2f</td></tr>" \
                   % (get_state_td(row['state']), row['runtime'])
         print "</tbody></table>"

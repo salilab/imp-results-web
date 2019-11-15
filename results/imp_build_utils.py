@@ -20,7 +20,8 @@ results_url = 'https://integrativemodeling.org/nightly/results/'
 # applications, or biological systems. They are only 'built', never tested
 # or benchmarked.
 SPECIAL_COMPONENTS = {'ALL': 'Entire cmake and make',
-                      'ALL_LAB': 'Entire cmake and make of lab-only components',
+                      'ALL_LAB':
+                      'Entire cmake and make of lab-only components',
                       'INSTALL': 'Installation of all of IMP',
                       'INSTALL_LAB': 'Installation of lab-only components',
                       'DOC': 'Build and install of documentation',
@@ -44,13 +45,14 @@ class Platform(object):
 rpm_vlong_header = """
 <p>This platform builds and tests the IMP RPM package on a fully updated
 %s system. The actual build is done in a
-<a href="https://github.com/rpm-software-management/mock/wiki">mock</a> environment.</p>
+<a href="https://github.com/rpm-software-management/mock/wiki">mock</a>
+environment.</p>
 """
 rpm_vlong_footer = """
 <p>To build an RPM package yourself, you can rebuild from the source RPM
 (available at the
-<a href="https://integrativemodeling.org/download-linux.html">download page</a>)
-or use the spec file in the
+<a href="https://integrativemodeling.org/download-linux.html">download
+page</a>) or use the spec file in the
 <a href="https://github.com/salilab/imp/tree/develop/tools/rpm">tools/rpm/</a>
 directory. Note that you will
 need some extra nonstandard RPM packages to reproduce our builds:
@@ -73,7 +75,8 @@ debug_build_vlong = """
 <p>This is a <b>debug</b> build, built with all checks turned on
 (<tt>IMP_MAX_CHECKS=INTERNAL</tt> cmake option). This is so that the tests
 can be as thorough as possible. The resulting code is much slower, however,
-so the IMP tests marked EXPENSIVE are skipped (they are run in fast builds).</p>
+so the IMP tests marked EXPENSIVE are skipped (they are run in fast
+builds).</p>
 """
 fast_build_vlong = """
 <p>This is a <b>fast</b> build, built with all checks and logging turned off
@@ -84,9 +87,9 @@ test failures may be hard to diagnose (IMP may segfault rather than
 reporting an error).</p>
 """
 fast_build_module_vlong = fast_build_vlong + """
-<p>In the Sali lab, fast builds can be used on the cluster or Linux workstations
-by running <tt>module load imp-fast</tt>. Work out all the bugs first
-though!</p>
+<p>In the Sali lab, fast builds can be used on the cluster or Linux
+workstations by running <tt>module load imp-fast</tt>. Work out all the
+bugs first though!</p>
 """
 
 release_build_module_vlong = """
@@ -177,15 +180,15 @@ repositories are built).
 
 cuda_vlong = """
 <p>This platform builds and tests IMP on a fully updated %s system with
-the CUDA toolkit and Python 3, and activates IMP's <b>experimental</b> GPU code.
-</p>
+the CUDA toolkit and Python 3, and activates IMP's <b>experimental</b> GPU
+code.</p>
 """
 
 coverage_vlong = """
 <p>This platform builds and tests IMP on a fully updated %s system with
 Python 3, and collects coverage information. This information is reported for
-both Python and C++ code, for modules and applications, on the far right side of
-the build summary page.</p>
+both Python and C++ code, for modules and applications, on the far right side
+of the build summary page.</p>
 
 <p>
 For more information on coverage reporting, see the
@@ -216,248 +219,280 @@ It is built with <a href="http://www.mpi-forum.org/">MPI</a> support
 parallel code.
 """
 
-all_platforms = (('i386-intel8', Platform('Lin32', 'Linux32',
-                       'Debug build (32-bit Linux; CentOS 6.10 on i686; '
-                       'Boost 1.41)',
-                       linux_vlong % ("32-bit CentOS 6.10", '',
-                                      debug_build_vlong),
-                       'bin.i386-intel8.log')),
-                 ('x86_64-intel8', Platform('Lin64', 'Linux64',
-                       'Debug build (64-bit Linux; CentOS 7.7 on x86_64; '
-                       'Boost 1.53)',
-                       linux_vlong % ("64-bit CentOS 7.7", '',
-                                      debug_build_vlong),
-                       'bin.x86_64-intel8.log')),
-                 ('mac10v4-intel', Platform('Mac', 'Mac 10.4',
-                       '32-bit Intel Mac (MacOS X 10.4 (Tiger), ' \
-                       '32 bit; Boost 1.47)', '', 'bin.mac10v4-intel.log')),
-                 ('mac10v4-intel64', Platform('M10.6', 'Mac 10.6',
-                       'Debug build (64-bit Intel Mac; MacOS X 10.6 '
-                       '(Snow Leopard); Boost 1.59; Python 2)',
-                       mac_vlong % ("64-bit 10.6 (Snow Leopard) Mac",
-                                    "Apple's Python 2") \
-                       + macpkg_vlong,
-                       'bin.mac10v4-intel64.log')),
-                 ('mac10v8-intel', Platform('M10.8', 'Mac 10.8',
-                       'Debug build (64-bit Intel Mac; MacOS X 10.8 '
-                       '(Mountain Lion); clang++; Boost 1.55; '
-                       'per-cpp compilation)',
-                       mac_vlong % ("64-bit 10.8 (Mountain Lion) Mac",
-                                    "Homebrew Python 2") \
-                       + percpp_vlong,
-                       'bin.mac10v8-intel.log')),
-                 ('mac10v9-intel', Platform('M10.9', 'Mac 10.9',
-                       'Debug build (64-bit Intel Mac; MacOS X 10.9 '
-                       '(Mavericks); clang++; Boost 1.58)',
-                       mac_vlong % ("64-bit 10.9 (Mavericks) Mac",
-                                    "Homebrew Python 2")
-                       + mac109_vlong,
-                       'bin.mac10v9-intel.log')),
-                 ('mac10v10-intel', Platform('M10.10', 'Mac 10.10',
-                       'Debug build (64-bit Intel Mac; MacOS X 10.10 '
-                       '(Yosemite); clang++; Boost 1.67; Python 3; '
-                       'per-cpp compilation)',
-                       mac_vlong % ("64-bit 10.10 (Yosemite) Mac",
-                                    "Homebrew Python 3") \
-                       + percpp_vlong,
-                       'bin.mac10v10-intel.log')),
-                 ('mac10v11-intel', Platform('M10.11', 'Mac 10.11',
-                       'Debug build (64-bit Intel Mac; MacOS X 10.11 '
-                       '(El Capitan); clang++; Boost 1.67; Python 3)',
-                       mac_vlong % ("64-bit 10.11 (El Capitan) Mac",
-                                    "Homebrew Python 3"),
-                       'bin.mac10v11-intel.log')),
-                 ('i386-w32', Platform('Win32', 'Windows',
-                       '32-bit Windows build (WINE 2.20, MSVC++ 2010 ' \
-                       'Express, Boost 1.53)', windows_vlong % "32-bit",
-                       'bin.i386-w32.log')),
-                 ('x86_64-w64', Platform('Win64', 'Windows64',
-                       '64-bit Windows build (WINE 2.20, MSVC++ 2012 ' \
-                       'Express, Boost 1.55)', windows_vlong % "64-bit",
-                       'bin.x86_64-w64.log')),
-                 ('fast', Platform('Fst32', 'Fast32',
-                       'Fast build (32-bit Linux, CentOS 6.10, Boost 1.41)',
-                       linux_vlong % ("32-bit CentOS 6.10", '',
-                                      fast_build_module_vlong),
-                       'bin-fast.i386-intel8.log')),
-                 ('fast64', Platform('Fst64', 'Fast64',
-                       'Fast build (64-bit Linux, CentOS 7.7, Boost 1.53)',
-                       linux_vlong % ("64-bit CentOS 7.7", '',
-                                      fast_build_module_vlong),
-                       'bin-fast.x86_64-intel8.log')),
-                 ('release64', Platform('Rls64', 'Rls64',
-                       'Release build (64-bit Linux, CentOS 7.7, Boost 1.53)',
-                       linux_vlong % ("64-bit CentOS 7.7", '',
-                                      release_build_module_vlong),
-                       'bin-release.x86_64-intel8.log')),
-                 ('cuda', Platform('CUDA', 'CUDA',
-                       'CUDA build (64-bit Linux, Fedora 31, gcc 9.2, '
-                       'Boost 1.69, CUDA toolkit 10.0, Python 3)',
-                       cuda_vlong % "64-bit Fedora 31",
-                       'bin-cuda.log')),
-                 ('openmp', Platform('OMP', 'OpenMP',
-                       'OpenMP build (64-bit Linux, CentOS 6.10, Boost 1.41)',
-                       linux_vlong % ("64-bit CentOS 6.10", openmp_vlong,
-                                      debug_build_vlong),
-                       'openmp.x86_64-intel8.log')),
-                 ('fastmac', Platform('FstMc', 'FastMac',
-                       'Fast build (MacOS X 10.8 (Mountain Lion), ' \
-                       '64 bit; clang++; Boost 1.55)',
-                       mac_header % ("64-bit 10.8 (Mountain Lion) Mac",
-                                     "Homebrew Python 2") \
-                       + fast_build_vlong, 'bin-fast.mac10v8-intel.log')),
-                 ('fastmac10v10', Platform('FstMc', 'FastMac',
-                       'Fast build (MacOS X 10.10 (Yosemite), ' \
-                       '64 bit; clang++; Boost 1.66)',
-                       mac_header % ("64-bit 10.10 (Yosemite) Mac",
-                                     "Homebrew Python 3") \
-                       + fast_build_vlong, 'bin-fast.mac10v10-intel.log')),
-                 ('fastmpi', Platform('MPI', 'FastMPI',
-                       'Fast build (64-bit Linux, OpenMPI 1.5.4, CentOS 6.10, ' \
-                       'Boost 1.41)',
-                       linux_vlong % ("64-bit CentOS 6.10", openmpi_vlong,
-                                      fast_build_vlong),
-                       'bin-fast.x86_64-intel8.mpi.log')),
-                 ('static', Platform('Stat', 'Static',
-                       'Static build (x86_64 Linux, CentOS 7.7, Boost 1.53)',
-                       static_vlong % "64-bit CentOS 7.7",
-                       'bin-static.x86_64-intel8.log')),
-                 ('pkg.el5-i386', Platform('RH5_3', 'RH5_32',
-                       'RedHat Enterprise/CentOS 5.11 32-bit RPM build; '
-                       'Boost 1.41',
-                       rpm_cvlong % ("32-bit CentOS 5.11", rpm_centos5),
-                       'package.el5-i386.log')),
-                 ('pkg.el5-x86_64', Platform('RH5_6', 'RH5_64',
-                       'RedHat Enterprise/CentOS 5.11 64-bit RPM build; '
-                       'Boost 1.41',
-                       rpm_cvlong % ("64-bit CentOS 5.11", rpm_centos5),
-                       'package.el5-x86_64.log')),
-                 ('pkg.el6-i386', Platform('RH6_3', 'RH6_32',
-                       'RedHat Enterprise/CentOS 6.10 32-bit RPM build; '
-                       'Boost 1.41',
-                       rpm_cvlong % ("32-bit CentOS 6.10", ""),
-                       'package.el6-i386.log')),
-                 ('pkg.el6-x86_64', Platform('RH6_6', 'RH6_64',
-                       'RedHat Enterprise/CentOS 6.10 64-bit RPM build; '
-                       'Boost 1.41',
-                       rpm_cvlong % ("64-bit CentOS 6.10", ""),
-                       'package.el6-x86_64.log')),
-                 ('pkg.el7-x86_64', Platform('RH7_6', 'RH7_64',
-                       'RedHat Enterprise/CentOS 7.7 64-bit RPM build; '
-                       'Boost 1.53',
-                       rpm_cvlong % ("64-bit CentOS 7.7", ""),
-                       'package.el7-x86_64.log')),
-                 ('pkg.el8-x86_64', Platform('RH8_6', 'RH8_64',
-                       'RedHat Enterprise/CentOS 8.0 64-bit RPM build; '
-                       'Boost 1.66, Python 3',
-                       rpm_cvlong % ("64-bit CentOS 8.0", ""),
-                       'package.el8-x86_64.log')),
-                 ('pkg.f16-x86_64', Platform('F16', 'F16 RPM',
-                       'Fedora 16 64-bit RPM; Boost 1.47, gcc 4.6',
-                       '', 'package.fc16-x86_64.log')),
-                 ('pkg.f17-x86_64', Platform('F17', 'F17 RPM',
-                       'Fedora 17 64-bit RPM; Boost 1.48, gcc 4.7',
-                       '', 'package.fc17-x86_64.log')),
-                 ('pkg.f18-x86_64', Platform('F18', 'F18 RPM',
-                       'Fedora 18 64-bit RPM; Boost 1.50, gcc 4.7',
-                       '', 'package.fc18-x86_64.log')),
-                 ('pkg.f19-x86_64', Platform('F19', 'F19 RPM',
-                       'Fedora 19 64-bit RPM; Boost 1.53, gcc 4.8',
-                       '', 'package.fc19-x86_64.log')),
-                 ('pkg.f20-x86_64', Platform('F20', 'F20 RPM',
-                       'Fedora 20 64-bit RPM build; Boost 1.54, gcc 4.8',
-                       rpm_vlong_header % "64-bit Fedora 20" \
-                        + rpm_vlong_footer + "</p>",
-                       'package.fc20-x86_64.log')),
-                 ('pkg.f21-x86_64', Platform('F21', 'F21 RPM',
-                       'Fedora 21 64-bit RPM build; Boost 1.55, gcc 4.9',
-                       rpm_vlong_header % "64-bit Fedora 21" \
-                        + rpm_vlong_footer + "</p>",
-                       'package.fc21-x86_64.log')),
-                 ('pkg.f22-x86_64', Platform('F22', 'F22 RPM',
-                       'Fedora 22 64-bit RPM build; Boost 1.57, gcc 5.1',
-                       rpm_vlong_header % "64-bit Fedora 22" \
-                        + rpm_vlong_footer + "</p>",
-                       'package.fc22-x86_64.log')),
-                 ('pkg.f23-x86_64', Platform('F23', 'F23 RPM',
-                       'Fedora 23 64-bit RPM build; Boost 1.58, gcc 5.1',
-                       rpm_vlong_header % "64-bit Fedora 23" \
-                        + rpm_vlong_footer + "</p>",
-                       'package.fc23-x86_64.log')),
-                 ('pkg.f24-x86_64', Platform('F24', 'F24 RPM',
-                       'Fedora 24 64-bit RPM build; Boost 1.60, gcc 6.2',
-                       rpm_vlong_header % "64-bit Fedora 24" \
-                        + rpm_vlong_footer + "</p>",
-                       'package.fc24-x86_64.log')),
-                 ('pkg.f25-x86_64', Platform('F25', 'F25 RPM',
-                       'Fedora 25 64-bit RPM build; Boost 1.60, gcc 6.2',
-                       rpm_vlong_header % "64-bit Fedora 25" \
-                        + rpm_vlong_footer + "</p>",
-                       'package.fc25-x86_64.log')),
-                 ('pkg.f26-x86_64', Platform('F26', 'F26 RPM',
-                       'Fedora 26 64-bit RPM build; Boost 1.63, gcc 7.1',
-                       rpm_vlong_header % "64-bit Fedora 26" \
-                        + rpm_vlong_footer + "</p>",
-                       'package.fc26-x86_64.log')),
-                 ('pkg.f27-x86_64', Platform('F27', 'F27 RPM',
-                       'Fedora 27 64-bit RPM build; Boost 1.64, gcc 7.2',
-                       rpm_vlong_header % "64-bit Fedora 27" \
-                        + rpm_vlong_footer + "</p>",
-                       'package.fc27-x86_64.log')),
-                 ('pkg.f28-x86_64', Platform('F28', 'F28 RPM',
-                       'Fedora 28 64-bit RPM build; Boost 1.66, gcc 8.0',
-                       rpm_vlong_header % "64-bit Fedora 28" \
-                        + rpm_vlong_footer + "</p>",
-                       'package.fc28-x86_64.log')),
-                 ('pkg.f29-x86_64', Platform('F29', 'F29 RPM',
-                       'Fedora 29 64-bit RPM build; Boost 1.66, gcc 8.2',
-                       rpm_vlong_header % "64-bit Fedora 29" \
-                        + rpm_vlong_footer + "</p>",
-                       'package.fc29-x86_64.log')),
-                 ('pkg.f30-x86_64', Platform('F30', 'F30 RPM',
-                       'Fedora 30 64-bit RPM build; Boost 1.69, gcc 9.0, '
-                       'Python 3',
-                       rpm_vlong_header % "64-bit Fedora 30" \
-                        + rpm_vlong_footer + "</p>",
-                       'package.fc30-x86_64.log')),
-                 ('pkg.f31-x86_64', Platform('F31', 'F31 RPM',
-                       'Fedora 31 64-bit RPM build; Boost 1.69, gcc 9.2, '
-                       'Python 3',
-                       rpm_vlong_header % "64-bit Fedora 31" \
-                        + rpm_vlong_footer + "</p>",
-                       'package.fc31-x86_64.log')),
-                 ('pkg.precise-x86_64', Platform('deb12', 'deb12',
-                       'Ubuntu 12.04 (Precise Pangolin) 64-bit package; '
-                       'Boost 1.48, gcc 4.6',
-                       ubuntu_vlong % "12.04 (Precise Pangolin)",
-                       'package.precise-x86_64.log')),
-                 ('pkg.trusty-x86_64', Platform('deb14', 'deb14',
-                       'Ubuntu 14.04 (Trusty Tahr) 64-bit package; '
-                       'Boost 1.54, gcc 4.8',
-                       ubuntu_vlong % "14.04 (Trusty Tahr)",
-                       'package.trusty-x86_64.log')),
-                 ('pkg.xenial-x86_64', Platform('deb16', 'deb16',
-                       'Ubuntu 16.04 (Xenial Xerus) 64-bit package; '
-                       'Boost 1.58, gcc 5.3',
-                       ubuntu_vlong % "16.04 (Xenial Xerus)",
-                       'package.xenial-x86_64.log')),
-                 ('pkg.bionic-x86_64', Platform('deb18', 'deb18',
-                       'Ubuntu 18.04 (Bionic Beaver) 64-bit package; '
-                       'Boost 1.65, gcc 7.2',
-                       ubuntu_vlong % "18.04 (Bionic Beaver)",
-                       'package.bionic-x86_64.log')),
-                 ('coverage', Platform('Cov', 'Coverage',
-                       'Coverage build (debug build on Fedora 31, 64-bit; ' \
-                       'Boost 1.69, gcc 9.2, Python 3)',
-                       coverage_vlong % ("64-bit Fedora 31",
-                                         debug_build_vlong),
-                       'coverage.log')))
+all_platforms = (
+    ('i386-intel8',
+     Platform('Lin32', 'Linux32',
+              'Debug build (32-bit Linux; CentOS 6.10 on i686; Boost 1.41)',
+              linux_vlong % ("32-bit CentOS 6.10", '', debug_build_vlong),
+              'bin.i386-intel8.log')),
+    ('x86_64-intel8',
+     Platform('Lin64', 'Linux64',
+              'Debug build (64-bit Linux; CentOS 7.7 on x86_64; Boost 1.53)',
+              linux_vlong % ("64-bit CentOS 7.7", '', debug_build_vlong),
+              'bin.x86_64-intel8.log')),
+    ('mac10v4-intel',
+     Platform('Mac', 'Mac 10.4',
+              '32-bit Intel Mac (MacOS X 10.4 (Tiger), 32 bit; Boost 1.47)',
+              '', 'bin.mac10v4-intel.log')),
+    ('mac10v4-intel64',
+     Platform('M10.6', 'Mac 10.6',
+              'Debug build (64-bit Intel Mac; MacOS X 10.6 '
+              '(Snow Leopard); Boost 1.59; Python 2)',
+              mac_vlong % ("64-bit 10.6 (Snow Leopard) Mac",
+                           "Apple's Python 2") + macpkg_vlong,
+              'bin.mac10v4-intel64.log')),
+    ('mac10v8-intel',
+     Platform('M10.8', 'Mac 10.8',
+              'Debug build (64-bit Intel Mac; MacOS X 10.8 '
+              '(Mountain Lion); clang++; Boost 1.55; per-cpp compilation)',
+              mac_vlong % ("64-bit 10.8 (Mountain Lion) Mac",
+                           "Homebrew Python 2") + percpp_vlong,
+              'bin.mac10v8-intel.log')),
+    ('mac10v9-intel',
+     Platform('M10.9', 'Mac 10.9',
+              'Debug build (64-bit Intel Mac; MacOS X 10.9 '
+              '(Mavericks); clang++; Boost 1.58)',
+              mac_vlong % ("64-bit 10.9 (Mavericks) Mac",
+                           "Homebrew Python 2") + mac109_vlong,
+              'bin.mac10v9-intel.log')),
+    ('mac10v10-intel',
+     Platform('M10.10', 'Mac 10.10',
+              'Debug build (64-bit Intel Mac; MacOS X 10.10 (Yosemite); '
+              'clang++; Boost 1.67; Python 3; per-cpp compilation)',
+              mac_vlong % ("64-bit 10.10 (Yosemite) Mac",
+                           "Homebrew Python 3") + percpp_vlong,
+              'bin.mac10v10-intel.log')),
+    ('mac10v11-intel',
+     Platform('M10.11', 'Mac 10.11',
+              'Debug build (64-bit Intel Mac; MacOS X 10.11 '
+              '(El Capitan); clang++; Boost 1.67; Python 3)',
+              mac_vlong % ("64-bit 10.11 (El Capitan) Mac",
+                           "Homebrew Python 3"),
+              'bin.mac10v11-intel.log')),
+    ('i386-w32',
+     Platform('Win32', 'Windows',
+              '32-bit Windows build (WINE 2.20, MSVC++ 2010 '
+              'Express, Boost 1.53)', windows_vlong % "32-bit",
+              'bin.i386-w32.log')),
+    ('x86_64-w64',
+     Platform('Win64', 'Windows64',
+              '64-bit Windows build (WINE 2.20, MSVC++ 2012 '
+              'Express, Boost 1.55)', windows_vlong % "64-bit",
+              'bin.x86_64-w64.log')),
+    ('fast',
+     Platform('Fst32', 'Fast32',
+              'Fast build (32-bit Linux, CentOS 6.10, Boost 1.41)',
+              linux_vlong % ("32-bit CentOS 6.10", '',
+                             fast_build_module_vlong),
+              'bin-fast.i386-intel8.log')),
+    ('fast64',
+     Platform('Fst64', 'Fast64',
+              'Fast build (64-bit Linux, CentOS 7.7, Boost 1.53)',
+              linux_vlong % ("64-bit CentOS 7.7", '', fast_build_module_vlong),
+              'bin-fast.x86_64-intel8.log')),
+    ('release64',
+     Platform('Rls64', 'Rls64',
+              'Release build (64-bit Linux, CentOS 7.7, Boost 1.53)',
+              linux_vlong % ("64-bit CentOS 7.7", '',
+                             release_build_module_vlong),
+              'bin-release.x86_64-intel8.log')),
+    ('cuda',
+     Platform('CUDA', 'CUDA',
+              'CUDA build (64-bit Linux, Fedora 31, gcc 9.2, '
+              'Boost 1.69, CUDA toolkit 10.0, Python 3)',
+              cuda_vlong % "64-bit Fedora 31",
+              'bin-cuda.log')),
+    ('openmp',
+     Platform('OMP', 'OpenMP',
+              'OpenMP build (64-bit Linux, CentOS 6.10, Boost 1.41)',
+              linux_vlong % ("64-bit CentOS 6.10", openmp_vlong,
+                             debug_build_vlong),
+              'openmp.x86_64-intel8.log')),
+    ('fastmac',
+     Platform('FstMc', 'FastMac',
+              'Fast build (MacOS X 10.8 (Mountain Lion), '
+              '64 bit; clang++; Boost 1.55)',
+              mac_header % ("64-bit 10.8 (Mountain Lion) Mac",
+                            "Homebrew Python 2") + fast_build_vlong,
+              'bin-fast.mac10v8-intel.log')),
+    ('fastmac10v10',
+     Platform('FstMc', 'FastMac',
+              'Fast build (MacOS X 10.10 (Yosemite), '
+              '64 bit; clang++; Boost 1.66)',
+              mac_header % ("64-bit 10.10 (Yosemite) Mac",
+                            "Homebrew Python 3") + fast_build_vlong,
+              'bin-fast.mac10v10-intel.log')),
+    ('fastmpi',
+     Platform('MPI', 'FastMPI',
+              'Fast build (64-bit Linux, OpenMPI 1.5.4, CentOS 6.10, '
+              'Boost 1.41)',
+              linux_vlong % ("64-bit CentOS 6.10", openmpi_vlong,
+                             fast_build_vlong),
+              'bin-fast.x86_64-intel8.mpi.log')),
+    ('static',
+     Platform('Stat', 'Static',
+              'Static build (x86_64 Linux, CentOS 7.7, Boost 1.53)',
+              static_vlong % "64-bit CentOS 7.7",
+              'bin-static.x86_64-intel8.log')),
+    ('pkg.el5-i386',
+     Platform('RH5_3', 'RH5_32',
+              'RedHat Enterprise/CentOS 5.11 32-bit RPM build; Boost 1.41',
+              rpm_cvlong % ("32-bit CentOS 5.11", rpm_centos5),
+              'package.el5-i386.log')),
+    ('pkg.el5-x86_64',
+     Platform('RH5_6', 'RH5_64',
+              'RedHat Enterprise/CentOS 5.11 64-bit RPM build; Boost 1.41',
+              rpm_cvlong % ("64-bit CentOS 5.11", rpm_centos5),
+              'package.el5-x86_64.log')),
+    ('pkg.el6-i386',
+     Platform('RH6_3', 'RH6_32',
+              'RedHat Enterprise/CentOS 6.10 32-bit RPM build; Boost 1.41',
+              rpm_cvlong % ("32-bit CentOS 6.10", ""),
+              'package.el6-i386.log')),
+    ('pkg.el6-x86_64',
+     Platform('RH6_6', 'RH6_64',
+              'RedHat Enterprise/CentOS 6.10 64-bit RPM build; Boost 1.41',
+              rpm_cvlong % ("64-bit CentOS 6.10", ""),
+              'package.el6-x86_64.log')),
+    ('pkg.el7-x86_64',
+     Platform('RH7_6', 'RH7_64',
+              'RedHat Enterprise/CentOS 7.7 64-bit RPM build; Boost 1.53',
+              rpm_cvlong % ("64-bit CentOS 7.7", ""),
+              'package.el7-x86_64.log')),
+    ('pkg.el8-x86_64',
+     Platform('RH8_6', 'RH8_64',
+              'RedHat Enterprise/CentOS 8.0 64-bit RPM build; '
+              'Boost 1.66, Python 3',
+              rpm_cvlong % ("64-bit CentOS 8.0", ""),
+              'package.el8-x86_64.log')),
+    ('pkg.f16-x86_64',
+     Platform('F16', 'F16 RPM',
+              'Fedora 16 64-bit RPM; Boost 1.47, gcc 4.6',
+              '', 'package.fc16-x86_64.log')),
+    ('pkg.f17-x86_64',
+     Platform('F17', 'F17 RPM',
+              'Fedora 17 64-bit RPM; Boost 1.48, gcc 4.7',
+              '', 'package.fc17-x86_64.log')),
+    ('pkg.f18-x86_64',
+     Platform('F18', 'F18 RPM',
+              'Fedora 18 64-bit RPM; Boost 1.50, gcc 4.7',
+              '', 'package.fc18-x86_64.log')),
+    ('pkg.f19-x86_64',
+     Platform('F19', 'F19 RPM',
+              'Fedora 19 64-bit RPM; Boost 1.53, gcc 4.8',
+              '', 'package.fc19-x86_64.log')),
+    ('pkg.f20-x86_64',
+     Platform('F20', 'F20 RPM',
+              'Fedora 20 64-bit RPM build; Boost 1.54, gcc 4.8',
+              rpm_vlong_header % "64-bit Fedora 20"
+              + rpm_vlong_footer + "</p>",
+              'package.fc20-x86_64.log')),
+    ('pkg.f21-x86_64',
+     Platform('F21', 'F21 RPM',
+              'Fedora 21 64-bit RPM build; Boost 1.55, gcc 4.9',
+              rpm_vlong_header % "64-bit Fedora 21"
+              + rpm_vlong_footer + "</p>",
+              'package.fc21-x86_64.log')),
+    ('pkg.f22-x86_64',
+     Platform('F22', 'F22 RPM',
+              'Fedora 22 64-bit RPM build; Boost 1.57, gcc 5.1',
+              rpm_vlong_header % "64-bit Fedora 22"
+              + rpm_vlong_footer + "</p>",
+              'package.fc22-x86_64.log')),
+    ('pkg.f23-x86_64',
+     Platform('F23', 'F23 RPM',
+              'Fedora 23 64-bit RPM build; Boost 1.58, gcc 5.1',
+              rpm_vlong_header % "64-bit Fedora 23"
+              + rpm_vlong_footer + "</p>",
+              'package.fc23-x86_64.log')),
+    ('pkg.f24-x86_64',
+     Platform('F24', 'F24 RPM',
+              'Fedora 24 64-bit RPM build; Boost 1.60, gcc 6.2',
+              rpm_vlong_header % "64-bit Fedora 24"
+              + rpm_vlong_footer + "</p>",
+              'package.fc24-x86_64.log')),
+    ('pkg.f25-x86_64',
+     Platform('F25', 'F25 RPM',
+              'Fedora 25 64-bit RPM build; Boost 1.60, gcc 6.2',
+              rpm_vlong_header % "64-bit Fedora 25"
+              + rpm_vlong_footer + "</p>",
+              'package.fc25-x86_64.log')),
+    ('pkg.f26-x86_64',
+     Platform('F26', 'F26 RPM',
+              'Fedora 26 64-bit RPM build; Boost 1.63, gcc 7.1',
+              rpm_vlong_header % "64-bit Fedora 26"
+              + rpm_vlong_footer + "</p>",
+              'package.fc26-x86_64.log')),
+    ('pkg.f27-x86_64',
+     Platform('F27', 'F27 RPM',
+              'Fedora 27 64-bit RPM build; Boost 1.64, gcc 7.2',
+              rpm_vlong_header % "64-bit Fedora 27"
+              + rpm_vlong_footer + "</p>",
+              'package.fc27-x86_64.log')),
+    ('pkg.f28-x86_64',
+     Platform('F28', 'F28 RPM',
+              'Fedora 28 64-bit RPM build; Boost 1.66, gcc 8.0',
+              rpm_vlong_header % "64-bit Fedora 28"
+              + rpm_vlong_footer + "</p>",
+              'package.fc28-x86_64.log')),
+    ('pkg.f29-x86_64',
+     Platform('F29', 'F29 RPM',
+              'Fedora 29 64-bit RPM build; Boost 1.66, gcc 8.2',
+              rpm_vlong_header % "64-bit Fedora 29"
+              + rpm_vlong_footer + "</p>",
+              'package.fc29-x86_64.log')),
+    ('pkg.f30-x86_64',
+     Platform('F30', 'F30 RPM',
+              'Fedora 30 64-bit RPM build; Boost 1.69, gcc 9.0, '
+              'Python 3',
+              rpm_vlong_header % "64-bit Fedora 30"
+              + rpm_vlong_footer + "</p>",
+              'package.fc30-x86_64.log')),
+    ('pkg.f31-x86_64',
+     Platform('F31', 'F31 RPM',
+              'Fedora 31 64-bit RPM build; Boost 1.69, gcc 9.2, '
+              'Python 3',
+              rpm_vlong_header % "64-bit Fedora 31"
+              + rpm_vlong_footer + "</p>",
+              'package.fc31-x86_64.log')),
+    ('pkg.precise-x86_64',
+     Platform('deb12', 'deb12',
+              'Ubuntu 12.04 (Precise Pangolin) 64-bit package; '
+              'Boost 1.48, gcc 4.6',
+              ubuntu_vlong % "12.04 (Precise Pangolin)",
+              'package.precise-x86_64.log')),
+    ('pkg.trusty-x86_64',
+     Platform('deb14', 'deb14',
+              'Ubuntu 14.04 (Trusty Tahr) 64-bit package; '
+              'Boost 1.54, gcc 4.8',
+              ubuntu_vlong % "14.04 (Trusty Tahr)",
+              'package.trusty-x86_64.log')),
+    ('pkg.xenial-x86_64',
+     Platform('deb16', 'deb16',
+              'Ubuntu 16.04 (Xenial Xerus) 64-bit package; '
+              'Boost 1.58, gcc 5.3',
+              ubuntu_vlong % "16.04 (Xenial Xerus)",
+              'package.xenial-x86_64.log')),
+    ('pkg.bionic-x86_64',
+     Platform('deb18', 'deb18',
+              'Ubuntu 18.04 (Bionic Beaver) 64-bit package; '
+              'Boost 1.65, gcc 7.2',
+              ubuntu_vlong % "18.04 (Bionic Beaver)",
+              'package.bionic-x86_64.log')),
+    ('coverage',
+     Platform('Cov', 'Coverage',
+              'Coverage build (debug build on Fedora 31, 64-bit; '
+              'Boost 1.69, gcc 9.2, Python 3)',
+              coverage_vlong % ("64-bit Fedora 31", debug_build_vlong),
+              'coverage.log')))
 platforms_dict = dict(all_platforms)
+
 
 def date_to_directory(date):
     """Convert a datetime.date object into the convention used to name
        directories on our system (e.g. '20120825')"""
     return date.strftime('%Y%m%d')
+
 
 class _UnitSummary(object):
     def __init__(self, cur, test_fails, new_test_fails, build_info):
@@ -492,7 +527,7 @@ class _UnitSummary(object):
                                           build_info)
         known_archs = [x[0] for x in all_platforms]
         self.all_archs = [x for x in known_archs if x in seen_archs] \
-                         + [x for x in seen_archs if x not in known_archs]
+            + [x for x in seen_archs if x not in known_archs]
 
     def make_only_failed(self):
         self.all_units = [x for x in self.all_units if x in self.failed_units]
@@ -811,6 +846,7 @@ def _text_format_build_summary(summary, unit, arch, arch_id):
     else:
         return statemap[s['state']]
 
+
 def _short_unit_name(unit):
     if unit.startswith('IMP.'):
         return unit[4:]
@@ -818,6 +854,7 @@ def _short_unit_name(unit):
         return 'kernel'
     else:
         return unit
+
 
 def send_imp_results_email(conn, msg_from, lab_only, branch):
     """Send out an email notification that new results are available."""
@@ -836,7 +873,7 @@ def send_imp_results_email(conn, msg_from, lab_only, branch):
     doc = db.get_doc_summary()
     summary.make_only_failed()
     msg = MIMEText(_get_email_body(db, buildsum, summary, url, log, doc))
-    msg['Keywords'] = ", ".join(["FAIL:" + _short_unit_name(x) \
+    msg['Keywords'] = ", ".join(["FAIL:" + _short_unit_name(x)
                                  for x in set(summary.failed_units)])
     msg['Subject'] = 'IMP nightly build results, %s' % db.date
     msg['Date'] = formatdate(localtime=True)
@@ -846,6 +883,7 @@ def send_imp_results_email(conn, msg_from, lab_only, branch):
     s.connect()
     s.sendmail(msg_from, [msg_to], msg.as_string())
     s.close()
+
 
 def _get_email_build_summary(buildsum):
     if buildsum == 'BUILD':
@@ -860,6 +898,7 @@ def _get_email_build_summary(buildsum):
     else:
         return ''
 
+
 def _get_email_body(db, buildsum, summary, url, log, doc):
     body = """IMP nightly build results, %s.
 %sPlease see %s for
@@ -873,12 +912,12 @@ DISAB = disabled due to wrong configuration;
 UNCON = was not configured; skip = not built on this platform;
 only components that failed on at least one platform are shown)
 """ % (db.date, _get_email_build_summary(buildsum), url)
-    body += " " * 18 + " ".join("%-5s" % platforms_dict[x].very_short \
+    body += " " * 18 + " ".join("%-5s" % platforms_dict[x].very_short
                                 for x in summary.all_archs) + "\n"
 
     for row in summary.all_units:
         errs = [_text_format_build_summary(summary.data, row, col,
-                                           summary.arch_ids[col]) \
+                                           summary.arch_ids[col])
                 for col in summary.all_archs]
         body += "%-18s" % row[:18] + " ".join("%-5s" % e[:5] for e in errs) \
                 + "\n"
@@ -892,7 +931,7 @@ only components that failed on at least one platform are shown)
         body += "\nThere were %d new test failures (tests that passed " \
                 "yesterday\n" % numfail \
                 + "but failed today) in the following components:\n" \
-                + "\n".join("   " + unit \
+                + "\n".join("   " + unit
                             for unit in sorted(failed_units.keys()))
     if doc:
         def _format_doc(title, nbroken):
@@ -906,8 +945,8 @@ only components that failed on at least one platform are shown)
             else:
                 return ''
         body += _format_doc('manual', doc['nbroken_manual']) \
-                + _format_doc('reference guide', doc['nbroken_tutorial']) \
-                + _format_doc('RMF manual', doc['nbroken_rmf_manual'])
+            + _format_doc('reference guide', doc['nbroken_tutorial']) \
+            + _format_doc('RMF manual', doc['nbroken_rmf_manual'])
     if log:
         def _format_log(l):
             txt = '%s %-10s %s' % (l.githash[:10],
