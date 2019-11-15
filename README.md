@@ -15,6 +15,8 @@ page at https://integrativemodeling.org/nightly/results/.
    a number of key=value pairs:
    - `HOST`, `DATABASE`, `USER`, `PASSWORD`: parameters to connect to the
      MySQL server.
+   - `TOPDIR`, `LAB_ONLY_TOPDIR`: directories where IMP build results (both
+     public and lab-only) can be found.
    - `MAIL_SERVER`, `MAIL_PORT`, `ADMINS`: host and port to connect to to
      send emails when the application encounters an error, and a Python
      list of users to notify.

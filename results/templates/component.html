@@ -1,0 +1,8 @@
+{% extends "layout.html" %}
+
+{% block body %}
+<h1>All {{ component }} test results for build on {{ build_id }}</h1>
+
+{{ test_table|safe }}
+
+{% endblock %}

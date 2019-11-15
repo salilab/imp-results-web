@@ -1,0 +1,16 @@
+{% extends "layout.html" %}
+
+{% block body %}
+<h1>Platform: {{ platform.short }}</h1>
+
+<p>{{ platform.long|safe }}</p>
+
+<p>{{ platform.very_long|safe }}</p>
+
+<ul>
+{%- for link in log_links %}
+  <li>{{ link|safe }}</li>
+{%- endfor %}
+</ul>
+
+{% endblock %}
