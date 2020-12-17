@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/salilab/imp-results-web.svg?branch=master)](https://travis-ci.org/salilab/imp-results-web)
+[![Build Status](https://github.com/salilab/imp-results-web/workflows/build/badge.svg?branch=master)](https://github.com/salilab/imp-results-web/actions?query=workflow%3Abuild)
 [![codecov](https://codecov.io/gh/salilab/imp-results-web/branch/master/graph/badge.svg)](https://codecov.io/gh/salilab/imp-results-web)
 
 This is a simple [Flask](https://palletsprojects.com/p/flask/) application
