@@ -642,7 +642,6 @@ window.onload = linkEmail;
         print "<th>File name</th>"
         print "<th>Number of benchmarks</th></tr></thead><tbody>"
         c.execute(query, (self.date, self.platform))
-        comp = None
         for row in c:
             link = self.get_link(page='benchfile', bench=row['file_id'])
             print "<tr><td>%s</td> <td><a href=\"%s\">%s</a></td> " \
