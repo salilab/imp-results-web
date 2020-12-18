@@ -3,12 +3,11 @@ import sys
 import re
 import os
 import glob
-import pickle
 import MySQLdb
 import time
 import datetime
 from imp_build_utils import BuildDatabase
-from imp_build_utils import all_platforms, platforms_dict, OK_STATES
+from imp_build_utils import platforms_dict, OK_STATES
 from imp_build_utils import results_url, lab_only_results_url
 from imp_build_utils import SPECIAL_COMPONENTS
 
@@ -277,7 +276,7 @@ window.onload = linkEmail;
         last_build_date = self.get_last_build_date()
         date = request.args.get('date', None)
         if date:
-            m = re.match('(\d{4})(\d{2})(\d{2})$', date)
+            m = re.match(r'(\d{4})(\d{2})(\d{2})$', date)
             if m:
                 date = datetime.date(year=int(m.group(1)),
                                      month=int(m.group(2)),
@@ -1010,17 +1009,17 @@ window.onload = linkEmail;
                       'or SVN from the following locations:</p>'
                 print '<ul>'
                 for comp, url in [
-                    ('multifit2',
-                     'https://svn.salilab.org/multifit/multifit2/'),
-                    ('isd2', 'https://github.com/salilab/isd2'),
-                    ('isd_emxl', 'https://github.com/salilab/isd_emxl'),
-                    ('hdx', 'https://github.com/salilab/hdx'),
-                    ('shg', 'https://github.com/salilab/shg'),
-                    ('hmc', 'https://github.com/salilab/hmc'),
-                    ('bayesem2d', 'https://github.com/salilab/bayesem2d'),
-                    ('autodiff', 'https://github.com/salilab/autodiff'),
-                    ('liegroup', 'https://github.com/salilab/liegroup'),
-                    ('domino3', 'https://github.com/salilab/domino3')]:
+                        ('multifit2',
+                         'https://svn.salilab.org/multifit/multifit2/'),
+                        ('isd2', 'https://github.com/salilab/isd2'),
+                        ('isd_emxl', 'https://github.com/salilab/isd_emxl'),
+                        ('hdx', 'https://github.com/salilab/hdx'),
+                        ('shg', 'https://github.com/salilab/shg'),
+                        ('hmc', 'https://github.com/salilab/hmc'),
+                        ('bayesem2d', 'https://github.com/salilab/bayesem2d'),
+                        ('autodiff', 'https://github.com/salilab/autodiff'),
+                        ('liegroup', 'https://github.com/salilab/liegroup'),
+                        ('domino3', 'https://github.com/salilab/domino3')]:
                     rev = revs.get(comp, "")
                     if rev:
                         if 'github' in url:
@@ -1056,8 +1055,8 @@ window.onload = linkEmail;
             print '<div class="gitlog">'
             print '<h2>Log</h2>'
             print '<table>'
-            for l in log:
-                title = l.title
+            for lm in log:
+                title = lm.title
                 if len(title) > 100:
                     title = title[:100] + '...'
                 # Link to RMF or PMI commits
@@ -1068,13 +1067,13 @@ window.onload = linkEmail;
                                r'<a href="' + pmi_github +
                                r'/commit/\1\2">salilab/pmi@\1</a>', title)
                 # Link to issues
-                title = re.sub(" #(\d+)",
+                title = re.sub(r" #(\d+)",
                                r' <a href="' + imp_github +
                                r'/issues/\1">#\1</a>', title)
                 print '<tr><td><a href="%s/commit/%s">%s</a></td> ' \
                       '<td>%s</td> <td>%s</td></tr>' \
-                      % (imp_github, l.githash, l.githash[:10],
-                         l.author_email.split('@')[0], title)
+                      % (imp_github, lm.githash, lm.githash[:10],
+                         lm.author_email.split('@')[0], title)
             print '</table>'
             print '</div>'
 

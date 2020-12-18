@@ -42,6 +42,7 @@ class Platform(object):
         self.very_long = very_long
         self.logfile = logfile
 
+
 rpm_vlong_header = """
 <p>This platform builds and tests the IMP RPM package on a fully updated
 %s system. The actual build is done in a
@@ -948,9 +949,10 @@ only components that failed on at least one platform are shown)
             + _format_doc('reference guide', doc['nbroken_tutorial']) \
             + _format_doc('RMF manual', doc['nbroken_rmf_manual'])
     if log:
-        def _format_log(l):
-            txt = '%s %-10s %s' % (l.githash[:10],
-                                   l.author_email.split('@')[0][:10], l.title)
+        def _format_log(lm):
+            txt = '%s %-10s %s' % (lm.githash[:10],
+                                   lm.author_email.split('@')[0][:10],
+                                   lm.title)
             return txt[:75]
-        body += "\n\nChangelog:\n" + "\n".join(_format_log(l) for l in log)
+        body += "\n\nChangelog:\n" + "\n".join(_format_log(lm) for lm in log)
     return body

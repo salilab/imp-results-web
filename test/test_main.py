@@ -7,4 +7,4 @@ import results
 def test_summary():
     """Test the summary page"""
     c = results.app.test_client()
-    rv = c.get('/')
+    _ = c.get('/')
