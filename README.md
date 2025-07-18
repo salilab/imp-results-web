@@ -1,6 +1,8 @@
-[![Build Status](https://github.com/salilab/imp-results-web/workflows/build/badge.svg?branch=master)](https://github.com/salilab/imp-results-web/actions?query=workflow%3Abuild)
-[![codecov](https://codecov.io/gh/salilab/imp-results-web/branch/master/graph/badge.svg)](https://codecov.io/gh/salilab/imp-results-web)
+# Obsolete
 
+This repo is obsolete. Please use the [imp_nightly_builds](https://github.com/salilab/imp_nightly_builds/tree/main/www) repo instead.
+
+## Old summary
 This is a simple [Flask](https://palletsprojects.com/p/flask/) application
 to show the [IMP](https://integrativemodeling.org/) nightly build results
 page at https://integrativemodeling.org/nightly/results/.
